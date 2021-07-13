@@ -47,14 +47,14 @@ with MongoClient("localhost", 27017) as client:
                     res.add(t)
                     r = {}
                     r["title"] = t
-                    r["price"] = clear_string(el.find_element_by_class_name("fl-product-tile-price__sale").text)
+                    r["price"] = clear_string(el.find_element_by_class_name("fl-product-tile-price__current").text)
                     done = False
                     data.update_one({"title": t}, {"$set": r}, upsert=True)
             el = driver.find_element_by_xpath('//div[@data-block-id="Novinki"]//a[contains(@class, "next-btn")]')
             #el = WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.XPATH, '//div[@data-block-id="Novinki"]//a[contains(@class, "next-btn")]')))
             if el:
                 el.click()
-                time.sleep(1)
+                time.sleep(1.5)
         else:
             done = True
 
